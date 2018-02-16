@@ -26,10 +26,6 @@ public class OrderItemFactory {
 
     private OrderItemFactory(){}
 
-    public static OrderItemFactory getInstance(){
-        return instance;
-    }
-
     /**
      * Builds an {@link SellableLineItem} based on line item properties. If item is taxable, builds a
      * {@link MaterialLineItem}. If not, builds a {@link ServiceLineItem}
