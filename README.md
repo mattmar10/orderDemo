@@ -1,2 +1,2 @@
 # orderDemo
-order demo
+Run all tests using ````mvn test````
