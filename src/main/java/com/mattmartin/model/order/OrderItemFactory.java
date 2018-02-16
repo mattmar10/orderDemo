@@ -19,7 +19,7 @@ import java.math.RoundingMode;
 public class OrderItemFactory {
 
     private static final OrderItemFactory instance = new OrderItemFactory();
-    private static final RoundingMode DEFAULT_ROUNDING_MODE = RoundingMode.HALF_EVEN;
+    private static final RoundingMode DEFAULT_ROUNDING_MODE = RoundingMode.HALF_UP;
 
     //to the nearest penny
     private static final int DEFAULT_SCALE = 2;

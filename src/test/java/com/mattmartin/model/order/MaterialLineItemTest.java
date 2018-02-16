@@ -25,7 +25,8 @@ public class MaterialLineItemTest {
         final SellableLineItem materialLineItem =
                 OrderItemFactory.getOrderLineItem(9, "testMaterialItem", 7.99f, 3,true);
 
-        final BigDecimal subTotal = materialLineItem.calculateLineItemPrice(.0825f);
+        BigDecimal subTotal = materialLineItem.calculateLineItemPrice(.0825f);
+        subTotal = subTotal.setScale(2, RoundingMode.HALF_EVEN);
 
         assertEquals(BigDecimal.valueOf(25.95).compareTo(subTotal), 0);
     }

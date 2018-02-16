@@ -35,8 +35,7 @@ public class MaterialLineItem implements SellableLineItem, Serializable {
         final BigDecimal itemSubTotal =
                 orderItem.getItem().getPrice().multiply(BigDecimal.valueOf(orderItem.getQuantity()));
 
-        BigDecimal result = itemSubTotal.multiply(BigDecimal.valueOf(taxRate)).add(itemSubTotal);
-        result = result.setScale(2, RoundingMode.HALF_EVEN);
+        final BigDecimal result = itemSubTotal.multiply(BigDecimal.valueOf(taxRate)).add(itemSubTotal);
 
         return result;
     }

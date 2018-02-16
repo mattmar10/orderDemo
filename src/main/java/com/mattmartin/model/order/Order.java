@@ -2,6 +2,7 @@ package com.mattmartin.model.order;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.Arrays;
 
 /**
@@ -26,16 +27,19 @@ public class Order implements Serializable{
         this. orderItems = orderItems;
     }
 
-    public float getOrderTotal(final float taxRate)
+    public BigDecimal getOrderTotal(final float taxRate)
     {
-        final BigDecimal result = Arrays.stream(orderItems)
+        BigDecimal result = Arrays.stream(orderItems)
                 .map(oItem -> oItem.calculateLineItemPrice(taxRate))
                 .reduce(BigDecimal.ZERO, BigDecimal::add);
 
-        return result.floatValue();
+        //accurate to the penny
+        result = result.setScale(2, RoundingMode.HALF_EVEN);
+
+        return result;
     }
 
-    public SellableLineItem[] getORderItems(){
+    public SellableLineItem[] getOrderItems(){
         return orderItems;
     }
 
