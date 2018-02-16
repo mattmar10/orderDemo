@@ -18,4 +18,14 @@ public class ServiceLineItemTest {
         final ServiceLineItem copy = SerializationUtils.clone(original);
         assertEquals(original, copy);
     }
+
+    @Test
+    void testCalculateLineItemPrice(){
+        final SellableLineItem serviceLineItem =
+                OrderItemFactory.getOrderLineItem(9, "testServiceItem", 7.99f, 3,false);
+
+        final BigDecimal subTotal = serviceLineItem.calculateLineItemPrice(.0825f);
+
+        assertEquals(BigDecimal.valueOf(23.97).compareTo(subTotal), 0);
+    }
 }
