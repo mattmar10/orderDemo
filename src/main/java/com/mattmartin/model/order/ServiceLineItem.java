@@ -1,11 +1,12 @@
 package com.mattmartin.model.order;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 
 /**
  * Created by mattmartin on 2/15/18.
  */
-public class ServiceLineItem implements SellableLineItem {
+public class ServiceLineItem implements SellableLineItem, Serializable{
 
     private static final long serialVersionUID = 20180215223319L;
 
@@ -24,5 +25,25 @@ public class ServiceLineItem implements SellableLineItem {
      */
     public BigDecimal calculateLineItemPrice(float taxRate) {
         return orderItem.getItem().getPrice().multiply(BigDecimal.valueOf(orderItem.getQuantity()));
+    }
+
+    @Override
+    public boolean equals(Object other){
+        if(other == null || other.getClass() != getClass()){
+            return false;
+        }
+
+        if(other == this){
+            return true;
+        }
+
+        final ServiceLineItem otherOrderItem = (ServiceLineItem) other;
+        return this.orderItem.equals(otherOrderItem.orderItem);
+
+    }
+
+    @Override
+    public int hashCode(){
+        return orderItem.hashCode();
     }
 }

@@ -5,14 +5,12 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import org.apache.commons.lang3.SerializationUtils;
 import org.junit.jupiter.api.Test;
 
 
 import java.math.BigDecimal;
 
-/**
- * Created by mattmartin on 2/15/18.
- */
 public class ItemTest
 {
 
@@ -35,6 +33,13 @@ public class ItemTest
 
         assertEquals(testItem, testItem2);
         assertNotEquals(testItem3, testItem);
+    }
+
+    @Test
+    void itemSerializationTest(){
+        final Item original = new Item(7, "testItem", BigDecimal.valueOf(7.77));
+        Item copy = SerializationUtils.clone(original);
+        assertEquals(original, copy);
     }
 
 }

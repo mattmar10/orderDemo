@@ -1,6 +1,7 @@
 package com.mattmartin.model.order;
 
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 
 /**
@@ -11,7 +12,7 @@ import java.math.BigDecimal;
  * @author Matt Martin
  * @version 1.0
  */
-public class MaterialLineItem implements SellableLineItem {
+public class MaterialLineItem implements SellableLineItem, Serializable {
 
     private static final long serialVersionUID = 20180215223911L;
 
@@ -32,6 +33,27 @@ public class MaterialLineItem implements SellableLineItem {
 
         final BigDecimal itemSubTotal = orderItem.getItem().getPrice().multiply(BigDecimal.valueOf(orderItem.getQuantity()));
         return itemSubTotal.multiply(BigDecimal.valueOf(taxRate)).add(itemSubTotal);
+    }
+
+
+    @Override
+    public boolean equals(Object other){
+        if(other == null || other.getClass() != getClass()){
+            return false;
+        }
+
+        if(other == this){
+            return true;
+        }
+
+        final MaterialLineItem otherOrderItem = (MaterialLineItem) other;
+        return this.orderItem.equals(otherOrderItem.orderItem);
+
+    }
+
+    @Override
+    public int hashCode(){
+        return orderItem.hashCode();
     }
 
 

@@ -3,6 +3,7 @@ package com.mattmartin.model.order;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 
 /**
@@ -13,7 +14,7 @@ import java.math.BigDecimal;
  * @author Matt Martin
  * @version 1.0
  */
-public final class Item {
+public final class Item implements Serializable{
     private static final long serialVersionUID = 20180215224015L;
 
     private final int key;
