@@ -14,5 +14,12 @@ import java.math.BigDecimal;
  */
 public interface SellableOrderItem extends Serializable {
 
+    /**
+     * Calculate the price for this order item given the taxRate.
+     *
+     * @param taxRate a float representing the tax rate (in decimal form)
+     *
+     * @return the line item price for this order item with taxes included.
+     */
     BigDecimal calculateOrderItemPrice(float taxRate);
 }

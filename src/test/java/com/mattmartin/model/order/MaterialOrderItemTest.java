@@ -26,7 +26,7 @@ public class MaterialOrderItemTest {
                 OrderItemFactory.getOrderLineItem(9, "testMaterialItem", 7.99f, 3,true);
 
         BigDecimal subTotal = materialLineItem.calculateOrderItemPrice(.0825f);
-        subTotal = subTotal.setScale(2, RoundingMode.HALF_EVEN);
+        subTotal = subTotal.setScale(OrderItemFactory.DEFAULT_SCALE, OrderItemFactory.DEFAULT_ROUNDING_MODE);
 
         assertEquals(BigDecimal.valueOf(25.95).compareTo(subTotal), 0);
     }
