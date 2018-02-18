@@ -5,10 +5,21 @@ import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.util.Collections;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class OrderTest {
+
+    @Test
+    void testEmptyOrder(){
+        final Order order = new Order(new SellableOrderItem[]{});
+        final BigDecimal bd = order.getOrderTotal(.08f);
+        final BigDecimal expected =
+                BigDecimal.valueOf(0.00).setScale(OrderItemFactory.DEFAULT_SCALE, OrderItemFactory.DEFAULT_ROUNDING_MODE);
+
+        assertEquals(expected, bd);
+    }
 
     @Test
     void testSingleMaterialItem(){
