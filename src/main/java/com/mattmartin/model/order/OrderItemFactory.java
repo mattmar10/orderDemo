@@ -8,7 +8,7 @@ import java.math.RoundingMode;
 /**
  * Singleton Factory for building order items.
  *
- * Builds {@link MaterialLineItem} for taxable order items and {@link ServiceLineItem} for non taxable
+ * Builds {@link MaterialOrderItem} for taxable order items and {@link ServiceOrderItem} for non taxable
  * order items.
  *
  * <p>Copyright: Copyright (c) 2018</p>
@@ -18,17 +18,16 @@ import java.math.RoundingMode;
  */
 public class OrderItemFactory {
 
-    private static final OrderItemFactory instance = new OrderItemFactory();
-    private static final RoundingMode DEFAULT_ROUNDING_MODE = RoundingMode.HALF_UP;
+    static final RoundingMode DEFAULT_ROUNDING_MODE = RoundingMode.HALF_UP;
 
     //to the nearest penny
-    private static final int DEFAULT_SCALE = 2;
+    static final int DEFAULT_SCALE = 2;
 
     private OrderItemFactory(){}
 
     /**
-     * Builds an {@link SellableLineItem} based on line item properties. If item is taxable, builds a
-     * {@link MaterialLineItem}. If not, builds a {@link ServiceLineItem}
+     * Builds an {@link SellableOrderItem} based on line item properties. If item is taxable, builds a
+     * {@link MaterialOrderItem}. If not, builds a {@link ServiceOrderItem}
      *
      * @param key
      * @param name
@@ -36,9 +35,9 @@ public class OrderItemFactory {
      * @param quantity
      * @param isTaxable
      *
-     * @return an {@link SellableLineItem} matching the given arguments.
+     * @return an {@link SellableOrderItem} matching the given arguments.
      */
-    public static SellableLineItem getOrderLineItem(
+    public static SellableOrderItem getOrderLineItem(
             final int key,
             final String name,
             final float price,
@@ -61,7 +60,7 @@ public class OrderItemFactory {
 
         /* Business requirements state that two types of line items exist, those that are taxable (Material) and those
         that are not (Service) */
-        return isTaxable ? new MaterialLineItem(orderItem) : new ServiceLineItem(orderItem);
+        return isTaxable ? new MaterialOrderItem(orderItem) : new ServiceOrderItem(orderItem);
 
     }
 }

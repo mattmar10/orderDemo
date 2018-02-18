@@ -3,16 +3,22 @@ package com.mattmartin.model.order;
 import java.io.Serializable;
 import java.math.BigDecimal;
 
+
 /**
- * Created by mattmartin on 2/15/18.
+ * Represents a material order line item. Taxes do not apply.
+ *
+ * <p>Copyright: Copyright (c) 2018</p>
+ * <p>Company: Matt Martin Co</p>
+ * @author Matt Martin
+ * @version 1.0
  */
-public class ServiceLineItem implements SellableLineItem, Serializable{
+public class ServiceOrderItem implements SellableOrderItem, Serializable{
 
     private static final long serialVersionUID = 20180215223319L;
 
     private final OrderItem orderItem;
 
-    public ServiceLineItem(final OrderItem orderItem){
+    public ServiceOrderItem(final OrderItem orderItem){
         this.orderItem = orderItem;
     }
 
@@ -23,7 +29,7 @@ public class ServiceLineItem implements SellableLineItem, Serializable{
      *                are not taxable
      * @return the price for this order line item
      */
-    public BigDecimal calculateLineItemPrice(float taxRate) {
+    public BigDecimal calculateOrderItemPrice(float taxRate) {
         return orderItem.getItem().getPrice().multiply(BigDecimal.valueOf(orderItem.getQuantity()));
     }
 
@@ -37,7 +43,7 @@ public class ServiceLineItem implements SellableLineItem, Serializable{
             return true;
         }
 
-        final ServiceLineItem otherOrderItem = (ServiceLineItem) other;
+        final ServiceOrderItem otherOrderItem = (ServiceOrderItem) other;
         return this.orderItem.equals(otherOrderItem.orderItem);
 
     }

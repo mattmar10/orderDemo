@@ -1,5 +1,7 @@
 package com.mattmartin.model.order;
 
+import org.apache.commons.lang3.builder.EqualsBuilder;
+
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
@@ -21,26 +23,41 @@ import java.util.Arrays;
 public class Order implements Serializable{
     private static final long serialVersionUID = 20180215222913L;
 
-    private final SellableLineItem[] orderItems;
+    private final SellableOrderItem[] orderItems;
 
-    public Order(final SellableLineItem... orderItems) {
+    public Order(final SellableOrderItem... orderItems) {
         this. orderItems = orderItems;
     }
 
     public BigDecimal getOrderTotal(final float taxRate)
     {
         BigDecimal result = Arrays.stream(orderItems)
-                .map(oItem -> oItem.calculateLineItemPrice(taxRate))
+                .map(oItem -> oItem.calculateOrderItemPrice(taxRate))
                 .reduce(BigDecimal.ZERO, BigDecimal::add);
 
         //accurate to the penny
-        result = result.setScale(2, RoundingMode.HALF_EVEN);
+        result = result.setScale(OrderItemFactory.DEFAULT_SCALE, OrderItemFactory.DEFAULT_ROUNDING_MODE);
 
         return result;
     }
 
-    public SellableLineItem[] getOrderItems(){
+    public SellableOrderItem[] getOrderItems(){
         return orderItems;
     }
 
+
+    @Override
+    public boolean equals(final Object other) {
+        if(other == null || other.getClass() != getClass()){
+            return false;
+        }
+
+        if(other == this){
+            return true;
+        }
+
+        final Order otherOrder = (Order) other;
+
+        return new EqualsBuilder().append(orderItems, otherOrder.orderItems).isEquals();
+    }
 }

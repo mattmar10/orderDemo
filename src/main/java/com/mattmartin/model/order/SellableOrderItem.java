@@ -1,5 +1,6 @@
 package com.mattmartin.model.order;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 
 /**
@@ -11,7 +12,7 @@ import java.math.BigDecimal;
  * @author Matt Martin
  * @version 1.0
  */
-public interface SellableLineItem {
+public interface SellableOrderItem extends Serializable {
 
-    BigDecimal calculateLineItemPrice(float taxRate);
+    BigDecimal calculateOrderItemPrice(float taxRate);
 }

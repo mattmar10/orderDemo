@@ -33,6 +33,8 @@ public class ItemTest
 
         assertEquals(testItem, testItem2);
         assertNotEquals(testItem3, testItem);
+
+        assertEquals(testItem.hashCode(), testItem2.hashCode());
     }
 
     @Test
@@ -41,5 +43,7 @@ public class ItemTest
         Item copy = SerializationUtils.clone(original);
         assertEquals(original, copy);
     }
+
+
 
 }

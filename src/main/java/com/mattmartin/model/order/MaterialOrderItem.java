@@ -3,7 +3,6 @@ package com.mattmartin.model.order;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.math.RoundingMode;
 
 /**
  * Represents a material order line item. Taxes apply.
@@ -13,13 +12,13 @@ import java.math.RoundingMode;
  * @author Matt Martin
  * @version 1.0
  */
-public class MaterialLineItem implements SellableLineItem, Serializable {
+public class MaterialOrderItem implements SellableOrderItem, Serializable {
 
     private static final long serialVersionUID = 20180215223911L;
 
     private final OrderItem orderItem;
 
-    public MaterialLineItem(final OrderItem orderItem) {
+    public MaterialOrderItem(final OrderItem orderItem) {
         this.orderItem = orderItem;
     }
 
@@ -30,7 +29,7 @@ public class MaterialLineItem implements SellableLineItem, Serializable {
      *
      * @return the line item price for this material line item.
      */
-    public BigDecimal calculateLineItemPrice(float taxRate) {
+    public BigDecimal calculateOrderItemPrice(float taxRate) {
 
         final BigDecimal itemSubTotal =
                 orderItem.getItem().getPrice().multiply(BigDecimal.valueOf(orderItem.getQuantity()));
@@ -51,7 +50,7 @@ public class MaterialLineItem implements SellableLineItem, Serializable {
             return true;
         }
 
-        final MaterialLineItem otherOrderItem = (MaterialLineItem) other;
+        final MaterialOrderItem otherOrderItem = (MaterialOrderItem) other;
         return this.orderItem.equals(otherOrderItem.orderItem);
 
     }

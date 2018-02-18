@@ -15,6 +15,12 @@ public final class OrderItem implements Serializable
     private final Item item;
     private final int quantity;
 
+    /**
+     * Package private constructor. Callers should use {@link OrderItemFactory for initialization}.
+     *
+     * @param item
+     * @param quantity
+     */
     OrderItem(final Item item, final int quantity){
         this.item = item;
         this.quantity = quantity;

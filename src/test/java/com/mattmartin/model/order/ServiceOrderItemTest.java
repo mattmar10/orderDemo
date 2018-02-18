@@ -7,24 +7,24 @@ import java.math.BigDecimal;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class ServiceLineItemTest {
+public class ServiceOrderItemTest {
 
     @Test
     void testMateriallineItemSerialization() {
         final Item testItem = new Item(3, "testServiceLineItem", BigDecimal.valueOf(3.99));
         final OrderItem orderItem = new OrderItem(testItem, 3);
-        final ServiceLineItem original = new ServiceLineItem(orderItem);
+        final ServiceOrderItem original = new ServiceOrderItem(orderItem);
 
-        final ServiceLineItem copy = SerializationUtils.clone(original);
+        final ServiceOrderItem copy = SerializationUtils.clone(original);
         assertEquals(original, copy);
     }
 
     @Test
     void testCalculateLineItemPrice(){
-        final SellableLineItem serviceLineItem =
+        final SellableOrderItem serviceLineItem =
                 OrderItemFactory.getOrderLineItem(9, "testServiceItem", 7.99f, 3,false);
 
-        final BigDecimal subTotal = serviceLineItem.calculateLineItemPrice(.0825f);
+        final BigDecimal subTotal = serviceLineItem.calculateOrderItemPrice(.0825f);
 
         assertEquals(BigDecimal.valueOf(23.97).compareTo(subTotal), 0);
     }
