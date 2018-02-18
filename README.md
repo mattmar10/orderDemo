@@ -1,4 +1,3 @@
-# orderDemo
 
 ## Overview
 Implementation revolves around the Order class and the getOrderTotal method.
@@ -8,5 +7,5 @@ an alternative implementation with ints could be evaluated.
 * Opted for Composition approach, but an Inheritance approach could also be evaluated if it would be a better
 fit for the larger application.
 
-##Tests
+## Tests
 Run all tests using ````mvn test````
